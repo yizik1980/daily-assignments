@@ -1,0 +1,180 @@
+.tv-wrap {
+  padding: 16px;
+  overflow: hidden;
+}
+
+.tv-scroll {
+  overflow-x: auto;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Table ── */
+.tv-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  min-width: 400px;
+}
+
+/* Header */
+.tv-table thead tr {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.tv-time-header {
+  padding: 14px 16px;
+  text-align: right;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  white-space: nowrap;
+  width: 80px;
+  min-width: 80px;
+  border-left: 1px solid rgba(255,255,255,0.15);
+}
+
+.tv-child-header {
+  padding: 10px 12px;
+  text-align: center;
+  border-left: 1px solid rgba(255,255,255,0.15);
+  min-width: 120px;
+}
+
+.tv-child-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.tv-child-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+  margin-top: 3px;
+}
+
+.tv-child-count {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.7);
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+/* Rows */
+.tv-row-even {
+  background: #fff;
+}
+
+.tv-row-odd {
+  background: #f8f9ff;
+}
+
+.tv-table tbody tr:hover {
+  background: #edf2ff;
+  transition: background 0.15s;
+}
+
+/* Time cell */
+.tv-time-cell {
+  padding: 10px 14px;
+  border-left: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e8ecf0;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.tv-time-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea22, #764ba222);
+  color: #667eea;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-variant-numeric: tabular-nums;
+  border: 1px solid #667eea33;
+}
+
+/* Task cells */
+.tv-task-cell {
+  padding: 8px 10px;
+  border-left: 1px solid #e8ecf0;
+  border-bottom: 1px solid #e8ecf0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.tv-task-cell.has-task {
+  background: linear-gradient(135deg, #f0f3ff, #f5f0ff);
+}
+
+.tv-task-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 20px;
+  padding: 5px 11px 5px 8px;
+  max-width: 150px;
+  box-shadow: 0 2px 6px rgba(102,126,234,0.3);
+}
+
+.tv-task-chip-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.tv-task-chip-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+}
+
+.tv-empty-cell {
+  color: #cbd5e0;
+  font-size: 0.9rem;
+}
+
+/* Empty state */
+.tv-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 10px;
+  color: #718096;
+  text-align: center;
+}
+
+.tv-empty-icon {
+  font-size: 3.5rem;
+  margin-bottom: 6px;
+}
+
+.tv-empty p {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.tv-empty-hint {
+  font-size: 0.85rem !important;
+  font-weight: 400 !important;
+  color: #a0aec0;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .tv-wrap {
+    padding: 10px;
+  }
+
+  .tv-task-chip-title {
+    max-width: 70px;
+  }
+}

@@ -1,0 +1,437 @@
+.schedule-view {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Child selector */
+.sv-children-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.sv-child-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  border: 2px solid #e2e8f0;
+  background: white;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #4a5568;
+  transition: all 0.2s;
+  white-space: nowrap;
+  min-width: 68px;
+}
+
+.sv-child-btn span:first-child {
+  font-size: 1.8rem;
+}
+
+.sv-child-btn:hover {
+  border-color: #667eea;
+}
+
+.sv-child-btn.selected {
+  border-color: #667eea;
+  background: linear-gradient(135deg, #667eea15, #764ba215);
+  color: #667eea;
+}
+
+/* Main layout: timeline + side panel */
+.sv-main {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* ── Timeline ── */
+.sv-timeline-wrap {
+  flex: 0 0 auto;
+}
+
+.sv-timeline {
+  position: relative;
+  width: 240px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  padding: 0 0 0 56px;
+}
+
+.sv-timeline.clickable {
+  cursor: crosshair;
+  box-shadow: 0 2px 12px rgba(102,126,234,0.25);
+  border: 2px solid #667eea44;
+}
+
+.sv-click-hint {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.72rem;
+  color: #667eea;
+  font-weight: 600;
+  background: #edf2ff;
+  padding: 3px 6px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Hour markers */
+.sv-hour-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.sv-hour-label {
+  position: absolute;
+  right: calc(100% - 52px);
+  font-size: 0.7rem;
+  color: #a0aec0;
+  font-weight: 600;
+  white-space: nowrap;
+  transform: translateY(-50%);
+  width: 44px;
+  text-align: left;
+  padding-right: 4px;
+}
+
+.sv-line {
+  position: absolute;
+  left: 56px;
+  right: 0;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+/* Draft time indicator */
+.sv-draft-indicator {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.sv-draft-time {
+  position: absolute;
+  right: calc(100% - 52px);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #667eea;
+  transform: translateY(-50%);
+  width: 44px;
+  text-align: left;
+}
+
+.sv-draft-line {
+  position: absolute;
+  left: 56px;
+  right: 0;
+  height: 2px;
+  background: #667eea;
+  border-radius: 2px;
+}
+
+/* Task cards on the timeline */
+.sv-task-card {
+  position: absolute;
+  left: 60px;
+  right: 6px;
+  min-height: 28px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 8px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(102,126,234,0.3);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.sv-task-card:hover {
+  transform: translateX(-2px);
+  box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+}
+
+.sv-task-card.editing {
+  outline: 2px solid #ffd700;
+  outline-offset: 1px;
+}
+
+.sv-card-time {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  white-space: nowrap;
+}
+
+.sv-card-icon {
+  font-size: 1rem;
+}
+
+.sv-card-title {
+  flex: 1;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sv-card-remove {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  font-size: 0.65rem;
+  border-radius: 4px;
+  padding: 1px 4px;
+  cursor: pointer;
+  line-height: 1.4;
+  transition: background 0.15s;
+}
+
+.sv-card-remove:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+/* ── Side panel ── */
+.sv-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+/* Edit panel */
+.sv-edit-panel {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(102,126,234,0.15);
+  border: 2px solid #667eea33;
+}
+
+.sv-edit-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sv-edit-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #718096;
+  margin-bottom: 6px;
+}
+
+.sv-time-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2d3748;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  margin-bottom: 6px;
+}
+
+.sv-time-input:focus {
+  border-color: #667eea;
+}
+
+.sv-edit-hint {
+  font-size: 0.75rem;
+  color: #a0aec0;
+  margin-bottom: 12px;
+}
+
+.sv-edit-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.sv-save-btn {
+  flex: 1;
+  padding: 10px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+
+.sv-save-btn:hover {
+  opacity: 0.9;
+}
+
+.sv-cancel-btn {
+  padding: 10px 14px;
+  background: #f7fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #718096;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.sv-cancel-btn:hover {
+  border-color: #fc8181;
+  color: #fc8181;
+}
+
+/* Unscheduled */
+.sv-unscheduled {
+  background: white;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.sv-unscheduled h3 {
+  font-size: 0.9rem;
+  color: #4a5568;
+  margin-bottom: 10px;
+}
+
+.sv-all-done {
+  font-size: 0.85rem;
+  color: #48bb78;
+  font-weight: 600;
+  text-align: center;
+  padding: 4px 0;
+}
+
+.sv-unsched-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.9rem;
+}
+
+.sv-unsched-item:last-child {
+  border-bottom: none;
+}
+
+.sv-unsched-title {
+  flex: 1;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.sv-assign-btn {
+  background: #edf2ff;
+  border: none;
+  color: #667eea;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.sv-assign-btn:hover {
+  background: #667eea;
+  color: white;
+}
+
+/* Summary list */
+.sv-summary {
+  background: white;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.sv-summary h3 {
+  font-size: 0.9rem;
+  color: #4a5568;
+  margin-bottom: 10px;
+}
+
+.sv-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background 0.1s;
+  border-radius: 6px;
+  padding-right: 4px;
+}
+
+.sv-summary-item:last-child {
+  border-bottom: none;
+}
+
+.sv-summary-item:hover {
+  background: #f7f8ff;
+}
+
+.sv-sum-time {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #667eea;
+  min-width: 38px;
+}
+
+.sv-sum-title {
+  font-size: 0.85rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+/* Mobile / narrow screens */
+@media (max-width: 500px) {
+  .sv-main {
+    flex-direction: column;
+  }
+
+  .sv-timeline-wrap {
+    width: 100%;
+  }
+
+  .sv-timeline {
+    width: 100%;
+  }
+}
