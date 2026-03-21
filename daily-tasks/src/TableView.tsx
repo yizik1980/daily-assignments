@@ -17,9 +17,14 @@ export default function TableView({ children, tasks }: Props) {
   const getTask = (taskId: number): Task | undefined =>
     tasks.find((t) => t.id === taskId);
 
-  // Collect all unique scheduled times, sorted
+  // Generate all hours from 07:00 to 20:00
+  const fixedHours = Array.from({ length: 14 }, (_, i) =>
+    `${String(i + 7).padStart(2, '0')}:00`
+  );
+
+  // Merge fixed hours with any scheduled times outside that range, sorted
   const allTimes = Array.from(
-    new Set(schedules.map((s) => s.time))
+    new Set([...fixedHours, ...schedules.map((s) => s.time)])
   ).sort();
 
   // For a given time + child: find scheduled task
